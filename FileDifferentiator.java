@@ -3,7 +3,9 @@ package differentiator;
 public class FileDifferentiator {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		SupportedFileTypes supportedFileTypes = new SupportedFileTypes;
+		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes;
 
 	}
 	
@@ -46,5 +48,25 @@ public class FileDifferentiator {
 			}
 			return true;
 		}
+		
+		
 	}
+	
+	private class SupportedFileTypes {
+		// This class fetches supported file types and stores them in an array
+	}
+		ArrayList<FileType> getSupportedFileTypes() {
+			ArrayList<FileType> supportedTypes = new ArrayList<FileType>();
+			FileType gif87a = new FileType("gif", new byte[] {0x47, 0x49, 0x46, 0x38, 0x37, 0x61}, 0);
+			FileType gif89a = new FileType("gif", new byte[] {0x47, 0x49, 0x46, 0x38, 0x39, 0x61}, 0);
+			FileType jpg = new FileType("jpg", new byte[] {(byte)0xff, (byte)0xd8, (byte)0xff}, 0); 
+			//FileType txt = new FileType
+			
+			supportedTypes.add(gif87a);
+			supportedTypes.add(gif89a);
+			supportedTypes.add(jpg);
+			
+			return supportedTypes;
+			
+		}
 }
