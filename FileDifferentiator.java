@@ -1,15 +1,24 @@
 package differentiator;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FileDifferentiator {
 
 	public static void main(String[] args) {
+		args[0] = "c:/dummypath/dummyfile.jpg";
+		if (args[0] == null) {
+			throw new IllegalArgumentException("No file path specified");
+		}
+		
+		Path filePath = Paths.get(args[0]);
 		
 		FileDifferentiator differentiator = new FileDifferentiator();
 		SupportedFileTypes supportedFileTypes = differentiator.new SupportedFileTypes();
 		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes();
+		
 
 	}
 	
