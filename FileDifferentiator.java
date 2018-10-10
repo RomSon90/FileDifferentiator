@@ -19,7 +19,7 @@ public class FileDifferentiator {
 		Path filePath = Paths.get(args[0]);
 		
 		try {
-			byte[] array = Files.readAllBytes(new File("/path/to/file").toPath());
+			byte[] array = Files.readAllBytes(filePath);
 		} catch (IOException ex) {
 			System.out.println(ex.toString());
 		}
