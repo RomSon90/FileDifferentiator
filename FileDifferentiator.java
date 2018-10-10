@@ -21,7 +21,7 @@ public class FileDifferentiator {
 
 		//Get supported file types
 		SupportedFileTypes supportedFileTypes = differentiator.new SupportedFileTypes();
-		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes();
+		ArrayList<FileType> supportedTypesArray = supportedFileTypes.getSupportedFileTypes();
 		
 		// Create the FileType out of target file
 		String fileExtension = pathToExtension(filePath);
@@ -29,8 +29,21 @@ public class FileDifferentiator {
 		int offset = 0;
 		
 		FileType checkedFile = differentiator.new FileType(fileExtension, magicBytes, offset);
-		
+		if (checkedFile.extension.equals("JPG") || checkedFile.extension.equals("JPEG")) {
+			byte[] newMagicNumber = new byte[3];
+			for (int i = 0; i < 3; i++) {
+				newMagicNumber[i] = checkedFile.magicNumber[i]; 
+			}
+			checkedFile.magicNumber = newMagicNumber;
+		}
+		for (FileType fType : supportedTypesArray) {
+			if (fType.equals(checkedFile)) {
+					System.out.println("File extension: " + fileExtension + " File type: " + fType.extension);
+				}
+			}
+		}
 	}
+
 	
 	private static byte[] getMagicBytes(Path filePath) {
 		byte[] fileMagicNumber = new byte[4] ;
