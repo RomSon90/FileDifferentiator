@@ -11,33 +11,41 @@ import java.util.Arrays;
 public class FileDifferentiator {
 
 	public static void main(String[] args) {
-
-		//Get the file and read bytes
+		FileDifferentiator differentiator = new FileDifferentiator();
+		
+		//Get the file path
 		if (args.length==0) {
 			throw new IllegalArgumentException("No file path specified");
 		}
-		
 		Path filePath = Paths.get(args[0]);
-		
-		/*
-		try {
-			byte[] array = Files.readAllBytes(filePath);
-		} catch (IOException ex) {
-			System.out.println(ex.toString());
-		}
-		*/
 
 		//Get supported file types
-		FileDifferentiator differentiator = new FileDifferentiator();
 		SupportedFileTypes supportedFileTypes = differentiator.new SupportedFileTypes();
 		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes();
 		
 		// Create the FileType out of target file
 		String fileExtension = pathToExtension(filePath);
-
+		byte[] magicBytes = getMagicBytes(filePath);
+		int offset = 0;
 		
-		byte[] fileMagicNumber;
-		int offset;
+		FileType checkedFile = differentiator.new FileType(fileExtension, magicBytes, offset);
+		
+	}
+	
+	private static byte[] getMagicBytes(Path filePath) {
+		byte[] fileMagicNumber = new byte[4] ;
+		
+		try {
+			byte[] fileAllBytes = Files.readAllBytes(filePath);
+			for (int i=0; i < 4; i++) {
+				fileMagicNumber[i] = fileAllBytes[i];
+			}
+		} catch (IOException ex) {
+			System.out.println(ex.toString());
+		}
+		
+		return fileMagicNumber;
+		
 	}
 	
 	private static String pathToExtension(Path path) {
