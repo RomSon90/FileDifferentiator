@@ -1,6 +1,5 @@
 package differentiator;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,10 +37,11 @@ public class FileDifferentiator {
 		}
 		for (FileType fType : supportedTypesArray) {
 			if (fType.equals(checkedFile)) {
-					System.out.println("File extension: " + fileExtension + " File type: " + fType.extension);
+				System.out.println("File extension: " + fileExtension.toUpperCase() + " File type: " + fType.extension);
+				return;
 			}
-		
-			}
+		}
+		System.out.println("File extension does not match file type");
 	}
 
 	
