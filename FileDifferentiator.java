@@ -1,11 +1,15 @@
 package differentiator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FileDifferentiator {
 
 	public static void main(String[] args) {
 		
-		SupportedFileTypes supportedFileTypes = new SupportedFileTypes;
-		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes;
+		FileDifferentiator differentiator = new FileDifferentiator();
+		SupportedFileTypes supportedFileTypes = differentiator.new SupportedFileTypes();
+		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes();
 
 	}
 	
@@ -54,8 +58,8 @@ public class FileDifferentiator {
 	
 	private class SupportedFileTypes {
 		// This class fetches supported file types and stores them in an array
-	}
-		ArrayList<FileType> getSupportedFileTypes() {
+	
+		public ArrayList<FileType> getSupportedFileTypes() {
 			ArrayList<FileType> supportedTypes = new ArrayList<FileType>();
 			FileType gif87a = new FileType("gif", new byte[] {0x47, 0x49, 0x46, 0x38, 0x37, 0x61}, 0);
 			FileType gif89a = new FileType("gif", new byte[] {0x47, 0x49, 0x46, 0x38, 0x39, 0x61}, 0);
@@ -69,4 +73,6 @@ public class FileDifferentiator {
 			return supportedTypes;
 			
 		}
+	}
 }
+
