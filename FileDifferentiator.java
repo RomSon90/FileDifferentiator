@@ -39,9 +39,9 @@ public class FileDifferentiator {
 		for (FileType fType : supportedTypesArray) {
 			if (fType.equals(checkedFile)) {
 					System.out.println("File extension: " + fileExtension + " File type: " + fType.extension);
-				}
 			}
-		}
+		
+			}
 	}
 
 	
