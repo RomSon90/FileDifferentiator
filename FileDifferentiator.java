@@ -12,25 +12,44 @@ public class FileDifferentiator {
 
 	public static void main(String[] args) {
 
+		//Get the file and read bytes
 		if (args.length==0) {
 			throw new IllegalArgumentException("No file path specified");
 		}
 		
 		Path filePath = Paths.get(args[0]);
 		
+		/*
 		try {
 			byte[] array = Files.readAllBytes(filePath);
 		} catch (IOException ex) {
 			System.out.println(ex.toString());
 		}
-		
-		
-		
+		*/
+
+		//Get supported file types
 		FileDifferentiator differentiator = new FileDifferentiator();
 		SupportedFileTypes supportedFileTypes = differentiator.new SupportedFileTypes();
 		ArrayList<FileType> supportedTypes = supportedFileTypes.getSupportedFileTypes();
 		
+		// Create the FileType out of target file
+		String fileExtension = pathToExtension(filePath);
 
+		
+		byte[] fileMagicNumber;
+		int offset;
+	}
+	
+	private static String pathToExtension(Path path) {
+		String fileName = path.toString();
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		}
+		
+		return extension;
 	}
 	
 	public class FileType {
